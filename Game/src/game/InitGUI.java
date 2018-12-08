@@ -25,17 +25,13 @@ public class InitGUI extends JPanel  {
     JButton wyjdz;
     
     
+    
     public InitGUI(){
         JLabel n1=new JLabel("Fast Letters");
         gra=new JButton(new ImageIcon("puzzle-icon2.png"));
         wyjdz=new JButton(new ImageIcon("exit.png"));
         
-      /*  gra.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    graActionPerformed(evt);
-                }
-            });
-        */
+     
         setLayout(null);
        
         Obrazy.loadInitialImages();
@@ -53,7 +49,9 @@ public class InitGUI extends JPanel  {
         wyjdz.setForeground(Color.YELLOW);
         n1.setBounds(320,150,900,200);
         n1.setFont(new Font("Courier New",Font.PLAIN, 90));
-        n1.setForeground(Color.blue);
+        n1.setForeground(Color.cyan);
+        
+       
         add(gra);
         add(wyjdz);
         add(n1);
@@ -68,7 +66,7 @@ public class InitGUI extends JPanel  {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         // Narysuj tĹ‚o
         g.drawImage(Obrazy.bgImage, 0, 0, null);
-    }                                ;
+    };
     
     public class End implements ActionListener{
         

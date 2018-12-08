@@ -9,36 +9,47 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
 public class Kategoria extends JPanel{
     
+    JButton zwierzetab;
+    JButton jedzenieb;
+    JButton cialob;
+    
     public Kategoria(){
         
-        JButton zwierzeta=new JButton(new ImageIcon("footprint.png"));
-        JButton jedzenie=new JButton(new ImageIcon("food.png"));
-        JButton cialo=new JButton(new ImageIcon("body.png"));
+        JLabel n2=new JLabel("Wybierz kategorię słówek");
+        zwierzetab=new JButton(new ImageIcon("footprint.png"));
+        jedzenieb=new JButton(new ImageIcon("food.png"));
+        cialob=new JButton(new ImageIcon("body.png"));
         
         Obrazy.loadInitialImages();
         
         setLayout(null);
         
-        zwierzeta.setBackground(Color.blue);
-        zwierzeta.setBounds(200,400,250,150);
-        zwierzeta.setFont(new Font("Comic Sans",Font.BOLD, 20));
+        zwierzetab.setBackground(Color.blue);
+        zwierzetab.setBounds(200,550,250,150);
+        zwierzetab.setFont(new Font("Comic Sans",Font.BOLD, 20));
         
-        jedzenie.setBackground(Color.ORANGE);
-        jedzenie.setBounds(500,400,250,150);
-        jedzenie.setFont(new Font("Comic Sans",Font.BOLD, 20));
+        jedzenieb.setBackground(Color.ORANGE);
+        jedzenieb.setBounds(500,550,250,150);
+        jedzenieb.setFont(new Font("Comic Sans",Font.BOLD, 20));
         
-        cialo.setBackground(Color.GREEN);
-        cialo.setBounds(800,400,250,150); 
-        cialo.setFont(new Font("Comic Sans",Font.BOLD, 20));
+        cialob.setBackground(Color.GREEN);
+        cialob.setBounds(800,550,250,150); 
+        cialob.setFont(new Font("Comic Sans",Font.BOLD, 20));
         
-        add(zwierzeta);
-        add(jedzenie);
-        add(cialo);
+        n2.setBounds(130,100,1200,400);
+        n2.setFont(new Font("Courier New",Font.PLAIN, 70));
+        n2.setForeground(Color.cyan);
+        
+        add(zwierzetab);
+        add(jedzenieb);
+        add(cialob);
+        add(n2);
         
     }
     

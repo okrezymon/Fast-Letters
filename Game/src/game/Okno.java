@@ -16,6 +16,7 @@ import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,6 +28,11 @@ public class Okno extends JFrame {
     InitGUI poczatek=new InitGUI();
     Menu menu=new Menu();
     Kategoria kategoria=new Kategoria();
+    Zwierzeta zwierzeta=new Zwierzeta();
+    Jedzenie jedzenie=new Jedzenie();
+    Cialo cialo=new Cialo();
+    Info info=new Info();
+    
     
     JPanel cardPanel;
     CardLayout cl;
@@ -35,6 +41,7 @@ public class Okno extends JFrame {
     
     
     public Okno(int width, int height, int x, int y){
+        
         super();
         setSize(width, height); 
         setLocation(x,y);
@@ -44,6 +51,9 @@ public class Okno extends JFrame {
         
         setVisible(true);
         panele();
+        
+        
+        
        
         
     }
@@ -52,7 +62,12 @@ public class Okno extends JFrame {
         getContentPane().add(cardPanel);
         cardPanel.add(poczatek,"POCZATEK");//To co w cudzysłowie to jak możemy to potem zawołać 
         cardPanel.add(kategoria,"CHOOSE");
+        cardPanel.add(zwierzeta,"ZWIERZETA");
+        cardPanel.add(jedzenie,"JEDZENIE");
+        cardPanel.add(cialo,"CIALO");
         cardPanel.add(menu,"MENU");
+        cardPanel.add(info,"INFO");
+        
         cl=(CardLayout)cardPanel.getLayout();
         cl.show(cardPanel,"POCZATEK");
         
@@ -64,10 +79,79 @@ public class Okno extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 cl.show(cardPanel,"CHOOSE");
             }
-            
-        
         });
         
+        kategoria.zwierzetab.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(cardPanel,"ZWIERZETA");
+            }
+            
+        });
+        
+        kategoria.jedzenieb.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(cardPanel,"JEDZENIE");
+            }
+            
+        });
+        
+        kategoria.cialob.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(cardPanel,"CIALO");
+            }
+            
+        });
+        
+        zwierzeta.menub.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(cardPanel,"MENU");
+            }
+            
+        });
+        
+        cialo.menub.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(cardPanel,"MENU");
+            }
+            
+        });
+        
+        jedzenie.menub.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(cardPanel,"MENU");
+            }
+            
+        });
+        
+        menu.odnowa.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(cardPanel,"CHOOSE");
+            }
+            
+        });
+        
+        menu.infob.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(cardPanel,"INFO");
+            }
+            
+        });
+        
+        info.powrotmenu.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(cardPanel,"MENU");
+            }
+            
+        });
     }
    
     
