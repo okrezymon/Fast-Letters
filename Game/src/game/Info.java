@@ -18,7 +18,7 @@ public class Info extends JPanel {
     
     public Info(){
         
-        powrotmenu = new JButton(new ImageIcon("replay2.png"));
+        powrotmenu = new JButton(new ImageIcon("images/replay2.png"));
         instrukcja = new JLabel("Cos");
         
         setLayout(null);

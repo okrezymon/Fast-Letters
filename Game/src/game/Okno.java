@@ -60,7 +60,7 @@ public class Okno extends JFrame {
         cardPanel.add(info,"INFO");
         
         cl=(CardLayout)cardPanel.getLayout();
-        cl.show(cardPanel,"WYBIERZ");
+        cl.show(cardPanel,"POCZATEK");
         
         poczatek.gra.addActionListener(new ActionListener(){
             @Override

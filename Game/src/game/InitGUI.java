@@ -27,8 +27,8 @@ public class InitGUI extends JPanel  {
     public InitGUI(){
         
         n1=new JLabel("Fast Letters");
-        gra=new JButton(new ImageIcon("puzzle.png"));
-        wyjdz=new JButton(new ImageIcon("exit.png"));
+        gra=new JButton(new ImageIcon("images/puzzle.png"));
+        wyjdz=new JButton(new ImageIcon("images/exit.png"));
         
         setLayout(null);
  

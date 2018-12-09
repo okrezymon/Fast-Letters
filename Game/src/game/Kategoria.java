@@ -26,9 +26,9 @@ public class Kategoria extends JPanel{
     public Kategoria(){
         
         n2=new JLabel("Wybierz kategorię słówek");
-        zwierzetab=new JButton(new ImageIcon("footprint.png"));
-        jedzenieb=new JButton(new ImageIcon("food.png"));
-        cialob=new JButton(new ImageIcon("body.png"));
+        zwierzetab=new JButton(new ImageIcon("images/footprint.png"));
+        jedzenieb=new JButton(new ImageIcon("images/food.png"));
+        cialob=new JButton(new ImageIcon("images/body.png"));
         
         setLayout(null);
         

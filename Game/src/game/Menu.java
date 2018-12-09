@@ -24,9 +24,9 @@ public class Menu extends JPanel{
     public Menu(){
         
         n5=new JLabel("Co dalej?");
-        odnowa=new JButton(new ImageIcon("replay2.png"));
-        infob=new JButton(new ImageIcon("info.png"));
-        wyjdz=new JButton(new ImageIcon("exit.png"));
+        odnowa=new JButton(new ImageIcon("images/replay2.png"));
+        infob=new JButton(new ImageIcon("images/info.png"));
+        wyjdz=new JButton(new ImageIcon("images/exit.png"));
         
         setLayout(null);
         

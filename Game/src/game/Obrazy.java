@@ -14,8 +14,8 @@ public class Obrazy {
     
     public static void loadInitialImages() {
         
-        bgImage = loadImage("tlo4.jpg");
-        bgzwImage = loadImage("tlozw.jpg");
+        bgImage = loadImage("images/tlo4.jpg");
+        bgzwImage = loadImage("images/tlozw.jpg");
         
     }
     public static Image loadImage(String fileName) {
