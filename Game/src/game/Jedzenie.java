@@ -19,24 +19,24 @@ public class Jedzenie extends JPanel {
         menub = new JButton("MENU");
         
         setLayout(null);
-        
-        menub.setBackground(Color.pink);
-        menub.setBounds(1000,850,200,80);
-        menub.setFont(new Font("Comic Sans",Font.BOLD, 30));
-        menub.setForeground(Color.YELLOW);
-        
+
         add(menub);
         
       Obrazy.loadInitialImages();
-      
       
     }
     
     protected void paintComponent(Graphics gs){
         Graphics2D g=(Graphics2D)gs;
-        //Ustaw tryb lepszej jakoĹ›ci grafiki (wygĹ‚adzanie/antyaliasing)
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        // Narysuj tĹ‚o
         g.drawImage(Obrazy.bgzwImage, 0, 0, null);
     };
+    
+    protected void przyciski(){
+        
+        menub.setBackground(Color.pink);
+        menub.setBounds(1000,850,200,80);
+        menub.setFont(new Font("Comic Sans",Font.BOLD, 30));
+        menub.setForeground(Color.YELLOW);
+    }
 }

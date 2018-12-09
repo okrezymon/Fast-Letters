@@ -7,6 +7,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalTime;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -18,17 +21,33 @@ public class Kategoria extends JPanel{
     JButton zwierzetab;
     JButton jedzenieb;
     JButton cialob;
+    JLabel n2;
     
     public Kategoria(){
         
-        JLabel n2=new JLabel("Wybierz kategorię słówek");
+        n2=new JLabel("Wybierz kategorię słówek");
         zwierzetab=new JButton(new ImageIcon("footprint.png"));
         jedzenieb=new JButton(new ImageIcon("food.png"));
         cialob=new JButton(new ImageIcon("body.png"));
         
+        setLayout(null);
+        
+        add(zwierzetab);
+        add(jedzenieb);
+        add(cialob);
+        add(n2);
+        przyciski();
         Obrazy.loadInitialImages();
         
-        setLayout(null);
+    }
+    
+    protected void paintComponent(Graphics gs){
+        Graphics2D g=(Graphics2D)gs;
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.drawImage(Obrazy.bgImage, 0, 0, null);
+    }  
+    
+    protected void przyciski(){
         
         zwierzetab.setBackground(Color.blue);
         zwierzetab.setBounds(200,550,250,150);
@@ -45,20 +64,5 @@ public class Kategoria extends JPanel{
         n2.setBounds(130,100,1200,400);
         n2.setFont(new Font("Courier New",Font.PLAIN, 70));
         n2.setForeground(Color.cyan);
-        
-        add(zwierzetab);
-        add(jedzenieb);
-        add(cialob);
-        add(n2);
-        
     }
-    
-    protected void paintComponent(Graphics gs){
-        Graphics2D g=(Graphics2D)gs;
-        //Ustaw tryb lepszej jakoĹ›ci grafiki (wygĹ‚adzanie/antyaliasing)
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        // Narysuj tĹ‚o
-        g.drawImage(Obrazy.bgImage, 0, 0, null);
-    }  
-    
 }

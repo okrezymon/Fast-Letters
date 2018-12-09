@@ -21,7 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+import java.util.Timer;
 
 public class Okno extends JFrame {
     
@@ -32,13 +32,8 @@ public class Okno extends JFrame {
     Jedzenie jedzenie=new Jedzenie();
     Cialo cialo=new Cialo();
     Info info=new Info();
-    
-    
     JPanel cardPanel;
     CardLayout cl;
-
-    
-    
     
     public Okno(int width, int height, int x, int y){
         
@@ -48,20 +43,16 @@ public class Okno extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false); 
         setUndecorated(false);
-        
         setVisible(true);
-        panele();
-        
-        
-        
-       
-        
+        panele();    
     }
+    
     public void panele(){
+        
         cardPanel=new JPanel(new CardLayout());
         getContentPane().add(cardPanel);
-        cardPanel.add(poczatek,"POCZATEK");//To co w cudzysłowie to jak możemy to potem zawołać 
-        cardPanel.add(kategoria,"CHOOSE");
+        cardPanel.add(poczatek,"POCZATEK");
+        cardPanel.add(kategoria,"WYBIERZ");
         cardPanel.add(zwierzeta,"ZWIERZETA");
         cardPanel.add(jedzenie,"JEDZENIE");
         cardPanel.add(cialo,"CIALO");
@@ -69,15 +60,12 @@ public class Okno extends JFrame {
         cardPanel.add(info,"INFO");
         
         cl=(CardLayout)cardPanel.getLayout();
-        cl.show(cardPanel,"POCZATEK");
-        
-        
-        
+        cl.show(cardPanel,"WYBIERZ");
         
         poczatek.gra.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                cl.show(cardPanel,"CHOOSE");
+                cl.show(cardPanel,"WYBIERZ");
             }
         });
         
@@ -85,6 +73,7 @@ public class Okno extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cl.show(cardPanel,"ZWIERZETA");
+                Slowo slowo = new Slowo();
             }
             
         });
@@ -132,7 +121,7 @@ public class Okno extends JFrame {
         menu.odnowa.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                cl.show(cardPanel,"CHOOSE");
+                cl.show(cardPanel,"WYBIERZ");
             }
             
         });
@@ -152,8 +141,5 @@ public class Okno extends JFrame {
             }
             
         });
-    }
-   
-    
-    
+    }   
 }

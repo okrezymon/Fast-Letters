@@ -5,12 +5,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
 import javax.swing.JButton;
+import javax.swing.Timer;
+
 
 
 public class Game {
-
-    
-   
     
     public static void main(String[] args) {
         int gameWidth=1280;
@@ -23,6 +22,7 @@ public class Game {
         int yCenter=(screenHeight-gameHeight)/2;
         
         Okno mojeokno=new Okno(gameWidth,gameHeight,xCenter,yCenter);
+        
     }
     
 }
