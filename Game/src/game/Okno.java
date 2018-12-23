@@ -60,7 +60,7 @@ public class Okno extends JFrame {
         cardPanel.add(info,"INFO");
         
         cl=(CardLayout)cardPanel.getLayout();
-        cl.show(cardPanel,"POCZATEK");
+        cl.show(cardPanel,"WYBIERZ");
         
         poczatek.gra.addActionListener(new ActionListener(){
             @Override
@@ -73,7 +73,7 @@ public class Okno extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cl.show(cardPanel,"ZWIERZETA");
-                Slowo slowo = new Slowo();
+                Slowoz slowoz = new Slowoz();
             }
             
         });
@@ -82,6 +82,7 @@ public class Okno extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cl.show(cardPanel,"JEDZENIE");
+                Slowoj slowoj = new Slowoj();
             }
             
         });
@@ -90,6 +91,7 @@ public class Okno extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cl.show(cardPanel,"CIALO");
+                Slowoc slowoc = new Slowoc();
             }
             
         });

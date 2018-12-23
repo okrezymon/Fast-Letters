@@ -21,6 +21,7 @@ public class Kategoria extends JPanel{
     JButton zwierzetab;
     JButton jedzenieb;
     JButton cialob;
+    
     JLabel n2;
     
     public Kategoria(){
@@ -29,12 +30,14 @@ public class Kategoria extends JPanel{
         zwierzetab=new JButton(new ImageIcon("images/footprint.png"));
         jedzenieb=new JButton(new ImageIcon("images/food.png"));
         cialob=new JButton(new ImageIcon("images/body.png"));
+ 
         
         setLayout(null);
         
         add(zwierzetab);
         add(jedzenieb);
         add(cialob);
+        
         add(n2);
         przyciski();
         Obrazy.loadInitialImages();
@@ -64,5 +67,7 @@ public class Kategoria extends JPanel{
         n2.setBounds(130,100,1200,400);
         n2.setFont(new Font("Courier New",Font.PLAIN, 70));
         n2.setForeground(Color.cyan);
+        
+       
     }
 }
