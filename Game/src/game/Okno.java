@@ -74,6 +74,7 @@ public class Okno extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 cl.show(cardPanel,"ZWIERZETA");
                 Slowoz slowoz = new Slowoz();
+                
             }
             
         });
