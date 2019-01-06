@@ -9,6 +9,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -21,13 +23,16 @@ public class Jedzenie extends JPanel implements ActionListener{
     JButton menub;
     Timer tm;
     Timer t;
-    int x=60,  y=0, velY=2,y2=-250, y3=-500, y4=-750, y5=-1000, y6=-1250, y7=-1500, y8=-1750, y9=-2000, y10=-2250;
+    int x=60,  y=0, velY=2, y2=-250, y3=-500, y4=-750, y5=-1000, y6=-1250, y7=-1500, y8=-1750, y9=-2000, y10=-2250, y11=-2500;
     
     public static boolean czywyswietlono = false;
+    boolean czym, czye, czya, czyt, czym1, czyi, czyl, czyk, czyf, czyr, czyu, czyi1, czyt1, czyb, czya1, czyn, czya2, czyn2, czya3, czya4, czyp, czyp1, czyl1, czye1, czyc, czyo1, czyf1, czyf2, czye3, czye4, czyc1, czyh, czye5, czye6, czys, czye7, czyc2,czyh1,czyi2, czyc3, czyk1,czye8,czyn1,czyy, czyo2,czyg,czyh2,czyu1,czyr3,czyt2;
+    int xc, yc;
+    static int wyl;
     
     public Jedzenie(){
         
-        tm = new Timer(5, this);
+        tm = new Timer(20, this);
         menub = new JButton("MENU");
         
         setLayout(null);
@@ -35,13 +40,21 @@ public class Jedzenie extends JPanel implements ActionListener{
         add(menub);
         przyciski();
         
-      Obrazy.loadInitialImages();
+        Obrazy.loadInitialImages();
+        
+        addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent e) {
+            xc=e.getX();
+            yc=e.getY();
+            //System.out.println(xc+","+yc);//these co-ords are relative to the component
+            }
+        }); 
       
     }
     
     protected void paintComponent(Graphics gs){
         
-        int a=1, b=1, c=1, d=1, e=1, f=1, h=1, j=1, k=1, l=1, m=1, n=1, o=1, p=1, r=1, s=1, t=1, u=1, w=1, a1=1, b1=1, c1=1, d1=1, e1=1, f1=1, g1=1, h1=1;
+        int a=1, b=1, c=1, d=1, e=1, f=1, h=1, j=1, k=1, l=1, m=1, n=1, o=1, p=1, r=1, s=1, t=1, u=1, w=1, a1=1, b1=1, c1=1, d1=1, e1=1, f1=1, g1=1, h1=1, i1=1;
         super.paintComponent(gs);
         Graphics2D g=(Graphics2D)gs;
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -50,7 +63,7 @@ public class Jedzenie extends JPanel implements ActionListener{
         if (Zwierzeta.czywyswietlono){
         //g.setColor(Color.RED);
         //g.fillRect(30,y,50,30);
-            /*for(int i=0;i<13;i+=4){ POZIOM 1
+            /*for(int i=0;i<13;i+=4){ 
                 g.drawImage(Obrazy.letters[i], x*a*4, y, null);
                 a++;
             };
@@ -93,7 +106,7 @@ public class Jedzenie extends JPanel implements ActionListener{
             
             
             
-            /*for(int i=1;i<11;i+=3){ POZIOM 2
+            /*for(int i=1;i<11;i+=3){ 
                 g.drawImage(Obrazy.letters[i], x*k*4, y, null);
                 k++;
             };
@@ -191,6 +204,11 @@ public class Jedzenie extends JPanel implements ActionListener{
                 h1++;
             };
             
+            for (int i=21;i>14;i-=2){
+                g.drawImage(Obrazy.letters[i], x*i1*4, y11, null); 
+                i1++;
+            };
+            
         }
         
         tm.start();
@@ -207,24 +225,327 @@ public class Jedzenie extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (Zwierzeta.czywyswietlono){
-        y = y + velY;
-        y2= y2 + velY; 
-        y3= y3 + velY; 
-        y4= y4 + velY; 
-        y5= y5 + velY; 
-        y6= y6 + velY; 
-        y7= y7 + velY; 
-        y8= y8 + velY;
-        y9= y9 + velY;
-        y10=y10+ velY;
-        repaint();}
+            y = y + velY;
+            y2= y2 + velY; 
+            y3= y3 + velY; 
+            y4= y4 + velY; 
+            y5= y5 + velY; 
+            y6= y6 + velY; 
+            y7= y7 + velY; 
+            y8= y8 + velY;
+            y9= y9 + velY;
+            y10=y10+ velY;
+            y11=y11+velY;
+            repaint();
+            
+            /*if(wyl==0){ POZIOM 1 SPRAWDZONE DZIALA WSZYSTKO
+                if(960<xc && xc<1060 && y<yc && yc<y+94){
+                    System.out.println("m");
+                    czym=true;
+                }
+                if(0<xc && xc<1060 && y2<yc && yc<y2+94 && czym==true){
+                    
+                    System.out.println("e");
+                    czye=true;
+                }
+                if(240<xc && xc<340 && y2<yc && yc<y2+94 && czym==true && czye==true){
+                    
+                    System.out.println("a");
+                    czya=true;
+                }
+                if(480<xc && xc<580 && y7<yc && yc<y7+94 && czym==true && czye==true && czya==true){
+                    
+                    System.out.println("t");
+                    czyt=true;
+                }
+                if(czym==true && czye==true && czya==true && czyt==true){
+                    System.out.println("OK");
+                }
+            
+            }   
+            
+            if(wyl==1){
+                if(960<xc && xc<1060 && y<yc && yc<y+94){
+                    System.out.println("m");
+                    czym1=true;
+                }
+                if(720<xc && xc<820 && y<yc && yc<y+94 && czym1==true ){
+                    
+                    System.out.println("i");
+                    czyi=true;
+                }
+                if(480<xc && xc<580 && y4<yc && yc<y4+94 && czym1==true && czyi==true){
+                    
+                    System.out.println("l");
+                    czyl=true;
+                }
+                if(960<xc && xc<1060 && y8<yc && yc<y8+94 && czym1==true && czyi==true && czyl==true){
+                    
+                    System.out.println("k");
+                    czyk=true;
+                }
+                if(czym1==true && czyi==true && czyl==true && czyk==true){
+                    System.out.println("OK");
+                }
+            }
+            
+            if(wyl==2){
+                if(480<xc && xc<580 && y2<yc && yc<y2+94){
+                    System.out.println("f");
+                    czyf=true;
+                }
+                if(960<xc && xc<1060 && y3<yc && yc<y3+94 && czyf==true){
+                    
+                    System.out.println("r");
+                    czyr=true;
+                }
+                if(720<xc && xc<820 && y5<yc && yc<y5+94 && czyf==true && czyr==true){
+                    
+                    System.out.println("u");
+                    czyu=true;
+                }
+                if(480<xc && xc<580 && y6<yc && yc<y6+94 && czyf==true && czyr==true && czyu==true){
+                    
+                    System.out.println("i");
+                    czyi1=true;
+                }
+                if(480<xc && xc<580 && y7<yc && yc<y7+94 && czyf==true && czyr==true && czyu==true && czyi1==true){
+                    
+                    System.out.println("t");
+                    czyt1=true;
+                }
+                if(czyf==true && czyr==true && czyu==true && czyi1==true && czyt1==true){
+                    System.out.println("OK");
+                }
+            }*/
+            
+            
+            /*if(wyl==0){ POZIOM 2 SPRAWDZONE WSZYSTKO DZIALA 
+                if(240<xc && xc<340 && y<yc && yc<y+94){
+                    System.out.println("b");
+                    czyb=true;
+                }
+                if(240<xc && xc<340 && y4<yc && yc<y4+94 && czyb==true ){
+                    
+                    System.out.println("a");
+                    czya1=true;
+                }
+                if(960<xc && xc<1060 && y5<yc && yc<y5+94 && czyb==true && czya1==true){
+                    
+                    System.out.println("n");
+                    czyn=true;
+                }
+                if(240<xc && xc<340 && y6<yc && yc<y6+94 && czyb==true && czya1==true && czyn==true){
+                    
+                    System.out.println("a");
+                    czya2=true;
+                }
+                if(720<xc && xc<820 && y8<yc && yc<y8+94 && czyb==true && czya1==true && czyn==true && czya2==true){
+                    
+                    System.out.println("n");
+                    czyn2=true;
+                }
+                if(240<xc && xc<340 && y9<yc && yc<y9+94 && czyb==true && czya1==true && czyn==true && czya2==true && czyn2==true){
+                    
+                    System.out.println("a");
+                    czya3=true;
+                }
+                if(czyb==true && czya1==true && czyn==true && czya2==true && czyn2==true && czya3==true){
+                    System.out.println("OK");
+                }
+            
+            }   
+            
+            if(wyl==1){
+                if(240<xc && xc<340 && y4<yc && yc<y4+94){
+                    System.out.println("a");
+                    czya4=true;
+                }
+                if(960<xc && xc<1060 && y6<yc && yc<y6+94 && czya4==true ){
+                    
+                    System.out.println("p");
+                    czyp=true;
+                }
+                if(960<xc && xc<1060 && y6<yc && yc<y6+94 && czya4==true && czyp==true){
+                    
+                    System.out.println("p");
+                    czyp1=true;
+                }
+                if(480<xc && xc<580 && y8<yc && yc<y8+94 && czya4==true && czyp==true && czyp1==true){
+                    
+                    System.out.println("l");
+                    czyl1=true;
+                }
+                if(480<xc && xc<580 && y9<yc && yc<y9+94 && czya4==true && czyp==true && czyp1==true && czyl1==true){
+                    
+                    System.out.println("e");
+                    czye1=true;
+                }
+                if(czym1==true && czya4==true && czyp==true && czyp1==true && czyl1==true && czye1==true){
+                    System.out.println("OK");
+                }
+            }
+            
+            if(wyl==2){
+                if(240<xc && xc<340 && y2<yc && yc<y2+94){
+                    System.out.println("c");
+                    czyc=true;
+                }
+                if(240<xc && xc<340 && y3<yc && yc<y3+94 && czyc==true ){
+                    
+                    System.out.println("o");
+                    czyo1=true;
+                }
+                if(480<xc && xc<580 && y6<yc && yc<y6+94 && czyc==true && czyo1==true){
+                    
+                    System.out.println("f1");
+                    czyf1=true;
+                }
+                if(720<xc && xc<8200 && y7<yc && yc<y7+94 && czyc==true && czyo1==true && czyf1==true){
+                    
+                    System.out.println("f2");
+                    czyf2=true;
+                }
+                if(480<xc && xc<580 && y9<yc && yc<y9+94 && czyc==true && czyo1==true && czyf1==true && czyf2==true){
+                    
+                    System.out.println("e1");
+                    czye3=true;
+                }
+                if(480<xc && xc<580 && y9<yc && yc<y9+94 && czyc==true && czyo1==true && czyf1==true && czyf2==true && czye3==true){
+                    
+                    System.out.println("e2");
+                    czye4=true;
+                }
+                if(czyc==true && czyo1==true && czyf1==true && czyf2==true && czye3==true && czye4==true){
+                    System.out.println("OK");
+                }
+            }*/
+            
+            
+            if(wyl==0){  //POZIOM 3 SPRAWDZONE WSZYSTKO DZIALA 
+                if(240<xc && xc<340 && y<yc && yc<y+94){
+                    System.out.println("c");
+                    czyc1=true;
+                }
+                if(480<xc && xc<580 && y<yc && yc<y+94 && czyc1==true ){
+                    
+                    System.out.println("h");
+                    czyh=true;
+                }
+                if(480<xc && xc<580 && y4<yc && yc<y4+94 && czyc1==true && czyh==true){
+        
+                    System.out.println("e");
+                    czye5=true;
+                }
+                if(480<xc && xc<580 && y4<yc && yc<y4+94 && czyc1==true && czyh==true && czye5==true){
+                    
+                    System.out.println("e2");
+                    czye6=true;
+                }
+                if(240<xc && xc<340 && y5<yc && yc<y5+94 && czyc1==true && czyh==true && czye5==true && czye6==true){
+                    
+                    System.out.println("s");
+                    czys=true;
+                }
+                if(480<xc && xc<580 && y8<yc && yc<y8+94 && czyc1==true && czyh==true && czye5==true && czye6==true && czys==true){
+                    
+                    System.out.println("e");
+                    czye7=true;
+                }
+                if(czyc1==true && czyh==true && czye5==true && czye6==true && czys==true && czye7==true){
+                    System.out.println("OK");
+                }
+            
+            }   
+            
+            if(wyl==1){
+                if(240<xc && xc<340 && y<yc && yc<y+94){
+                    System.out.println("c");
+                    czyc2=true;
+                }
+                if(480<xc && xc<580 && y<yc && yc<y+94 && czyc2==true ){
+                    
+                    System.out.println("h");
+                    czyh1=true;
+                }
+                if(720<xc && xc<820 && y4<yc && yc<y4+94 && czyc2==true && czyh1==true){
+                    
+                    System.out.println("i");
+                    czyi2=true;
+                }
+                if(240<xc && xc<340 && y6<yc && yc<y6+94 && czyc2==true && czyh1==true && czyi2==true){
+                    
+                    System.out.println("c");
+                    czyc3=true;
+                }
+                if(960<xc && xc<1060 && y7<yc && yc<y7+94 && czyc2==true && czyh1==true && czyi2==true && czyc3==true){
+                    
+                    System.out.println("k");
+                    czyk1=true;
+                }
+                if(480<xc && xc<580 && y7<yc && yc<y7+94 && czyc2==true && czyh1==true && czyi2==true && czyc3==true && czyk1==true){
+                    
+                    System.out.println("e");
+                    czye8=true;
+                }
+                if(720<xc && xc<820 && y10<yc && yc<y10+94 && czyc2==true && czyh1==true && czyi2==true && czyc3==true && czyk1==true && czye8==true){
+                    
+                    System.out.println("n");
+                    czyn1=true;
+                }
+                if(czyc2==true && czyh1==true && czyi2==true && czyc3==true && czyk1==true && czye8==true && czyn1==true){
+                    System.out.println("OK");
+                }
+            }
+            
+            if(wyl==2){
+                if(240<xc && xc<340 && y2<yc && yc<y2+94){
+                    System.out.println("y");
+                    czyy=true;
+                }
+                if(240<xc && xc<340 && y3<yc && yc<y3+94 && czyy==true ){
+                    
+                    System.out.println("o");
+                    czyo2=true;
+                }
+                if(960<xc && xc<1060 && y5<yc && yc<y5+94 && czyy==true && czyo2==true){
+                    
+                    System.out.println("g");
+                    czyg=true;
+                }
+                if(480<xc && xc<580 && y6<yc && yc<y6+94 && czyy==true && czyo2==true && czyg==true){
+                    
+                    System.out.println("h");
+                    czyh2=true;
+                }
+                if(720<xc && xc<820 && y8<yc && yc<y8+94 && czyy==true && czyo2==true && czyg==true && czyh2==true){
+                    
+                    System.out.println("u");
+                    czyu1=true;
+                }
+                if(480<xc && xc<580 && y9<yc && yc<y9+94 && czyy==true && czyo2==true && czyg==true && czyh2==true && czyu1==true){
+                    
+                    System.out.println("r");
+                    czyr3=true;
+                }
+                if(480<xc && xc<580 && y11<yc && yc<y11+94 && czyy==true && czyo2==true && czyg==true && czyh2==true && czyu1==true && czyr3==true){
+                    
+                    System.out.println("t");
+                    czyt2=true;
+                }
+                
+                if(czyy==true && czyo2==true && czyg==true && czyh2==true && czyu1==true && czyr3==true && czyt==true){
+                    System.out.println("OK");
+                }
+            }
+        }
     }
     
     
 }
 class Slowoj extends JDialog{
     
-    public static String[] slowaj;
+    public static String[] slowaj1, slowaj2, slowaj3;
     
     public Slowoj(){
         
@@ -255,11 +576,24 @@ class Slowoj extends JDialog{
     public class Panel extends JPanel{
         
         public Panel(){
-            slowaj = new String[3];
-            slowaj[0] = "MEAT";
-            slowaj[1] = "MILK";
-            slowaj[2] = "FRUIT";
-            JLabel sl = new JLabel(slowaj[losuj()]);
+            slowaj1 = new String[3];
+            slowaj2 = new String[3];
+            slowaj3 = new String[3];
+            
+            slowaj1[0] = "MEAT";
+            slowaj1[1] = "MILK";
+            slowaj1[2] = "FRUIT";
+            
+            slowaj2[0] = "BANANA";
+            slowaj2[1] = "APPLE";
+            slowaj2[2] = "COFFEE";
+            
+            slowaj3[0] = "CJHEESE";
+            slowaj3[1] = "CHICKEN";
+            slowaj3[2] = "YOGHURT";
+            
+            Jedzenie.wyl=losuj();
+            JLabel sl = new JLabel(slowaj1[Jedzenie.wyl]);
             setSize(400, 200); 
             setLayout(null);
             sl.setBounds(140,50,200,100);
@@ -271,7 +605,7 @@ class Slowoj extends JDialog{
         
         public int losuj(){
  
-            int zakres=slowaj.length-1;
+            int zakres=slowaj1.length-1;
             int wylosowany=(int)Math.round(Math.random()*zakres);
             return wylosowany; 
         }
