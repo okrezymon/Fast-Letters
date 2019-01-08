@@ -23,6 +23,7 @@ public class Game {
         
         Okno mojeokno=new Okno(gameWidth,gameHeight,xCenter,yCenter);
         
+        
     }
     
 }

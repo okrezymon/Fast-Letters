@@ -32,8 +32,11 @@ public class Okno extends JFrame {
     Jedzenie jedzenie=new Jedzenie();
     Cialo cialo=new Cialo();
     Info info=new Info();
+    
+    
     JPanel cardPanel;
     CardLayout cl;
+    public static boolean doliterek;
     
     public Okno(int width, int height, int x, int y){
         
@@ -44,8 +47,13 @@ public class Okno extends JFrame {
         setResizable(false); 
         setUndecorated(false);
         setVisible(true);
-        panele();    
+        
+        panele();  
+        
+        
+        
     }
+    
     
     public void panele(){
         
@@ -60,7 +68,7 @@ public class Okno extends JFrame {
         cardPanel.add(info,"INFO");
         
         cl=(CardLayout)cardPanel.getLayout();
-        cl.show(cardPanel,"WYBIERZ");
+        cl.show(cardPanel,"POCZATEK");
         
         poczatek.gra.addActionListener(new ActionListener(){
             @Override
@@ -73,6 +81,8 @@ public class Okno extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cl.show(cardPanel,"ZWIERZETA");
+                
+                Zwierzeta.restartz();
                 Slowoz slowoz = new Slowoz();
                 
             }
@@ -83,6 +93,7 @@ public class Okno extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cl.show(cardPanel,"JEDZENIE");
+                Jedzenie.restartj();
                 Slowoj slowoj = new Slowoj();
             }
             
@@ -92,6 +103,7 @@ public class Okno extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cl.show(cardPanel,"CIALO");
+                Cialo.restartc();
                 Slowoc slowoc = new Slowoc();
             }
             
@@ -144,5 +156,28 @@ public class Okno extends JFrame {
             }
             
         });
+        
+        
+        Przegrana.dokat.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(cardPanel,"WYBIERZ");
+                
+                
+            }
+            
+        });
+        
+        Wygrana.dokat.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(cardPanel,"WYBIERZ");
+                
+                
+            }
+            
+        });
+        
+        
     }   
 }
