@@ -15,6 +15,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Klasa Kategoria dziedzicząca po JPanel
+ * Wyświetla przyciski umożliwiające wybór danej kategorii i ładuje tło
+ * @author Olga Krezymon
+ */
 
 public class Kategoria extends JPanel{
     
@@ -24,31 +29,47 @@ public class Kategoria extends JPanel{
     
     JLabel n2;
     
+    /**
+     * Konstruktor klasy Kategoria
+     * Ładuje obrazy do przycisków i dodaje je do panelu.
+     * Wywołuje funkcję ładująca tło
+     */
+    
     public Kategoria(){
         
         n2=new JLabel("Wybierz kategorię słówek");
         zwierzetab=new JButton(new ImageIcon("images/footprint.png"));
         jedzenieb=new JButton(new ImageIcon("images/food.png"));
         cialob=new JButton(new ImageIcon("images/body.png"));
- 
         
         setLayout(null);
         
         add(zwierzetab);
         add(jedzenieb);
         add(cialob);
-        
         add(n2);
+        
+        // wywołanie funkcji odpowiadającej za odpowiednie ustawienie przycisków 
         przyciski();
+        //wywolanie funkcji ładującej obraz tła
         Obrazy.loadInitialImages();
         
     }
+    
+    /**
+     * Metoda odpowiedzialna za odrysowanie tła na panelu
+     * @param gs 
+     */
     
     protected void paintComponent(Graphics gs){
         Graphics2D g=(Graphics2D)gs;
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.drawImage(Obrazy.bgImage, 0, 0, null);
     }  
+    
+    /**
+     * Metoda odpowiedzialna za ustawienie przycisków i ich właściwości
+     */
     
     protected void przyciski(){
         

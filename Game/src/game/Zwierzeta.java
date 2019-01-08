@@ -11,35 +11,57 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.JDialog;
-//import java.util.TimerTask;
+
+/**
+ * Klasa Zwierzeta dziedzicząca po JPanel implementująca ActionListener. 
+ * Panel, w którym dzieje się cała rozgrywka w kategorii "ZWIERZĘTA" 
+ * @author Olga Krezymon
+ */
 
 public class Zwierzeta extends JPanel implements ActionListener {
     
+    /** Przycisk przejścia do menu */
     JButton menub;
+    /** Timer odpowiedzialny za animację literek */
     Timer tm;
+    /** Timer odpowiedzialny za wyświetlanie JDialog przez określony czas*/
     Timer t;
+    /** Współrzędne spadających literek */
     static int x=60,  y=0, velY1=2, velY2=3, velY3=4 ,y2=-250, y3=-500, y4=-750, y5=-1000, y6=-1250, y7=-1500, y8=-1750, y9=-2000, y10=-2250;
-    //int c;
+    /** Zmienna boolowska, która informuje o upłynięciu czasu timera odpowiedzialnego za wyświetlanie JDialoga */
     public static boolean czywyswietlonoz;
+    /** Zmienne boolowskie sprawdzające, czy użytkownik wybrał prawidłową literkę */
     boolean czyc, czya, czyt, czyd, czyo, czyg, czyc1, czyo1, czyw, czyh, czyo2, czyr, czys, czye, czyf, czyr1, czyo3, czyg1, czyb, czyi, czyr2, czyd1, czyz, czye1, czyb1, czyr3, czya1, czys1, czyh1, czya2, czyr4, czyk, czyg2, czyi1, czyr5, czya3, czyf1, czyf2, czye2;
+    /** Zmienne boolowskie sprawdzające, czy użytkownik prawidłowo odgadł całe słowo */
     public static boolean czy1poziomz=true, czy2poziomz, czy3poziomz, czy4poziomz;
+    /** Współrzędne kliknięcia */
     static int xc, yc;
+    /** Zmienna przechowująca wynik funkcji losuj() */
     static int wyl;
+    /** Utworzenie obiektu typu Przegrana */
     Przegrana koniec = new Przegrana();
+    /** Utworzenie obiektu typu Wygrana */
     Wygrana wygr = new Wygrana();
+    
+    /**
+     * Konstruktor klasy Zwierzeta
+     * Wywołuje timer, definiuje przycisk i wywołuje funkcję przyciski() oraz 
+     * funkcję rysującą tło. Obsługuje zdarzenie kliknięcia myszy
+     */
     
     public Zwierzeta() {
         
+        /** Timer relizujący "animację", która odświeża obraz co 20 milisekund wskazujący
+         * na użycie ActionListener po którym implementuje klasa Zwierzęta
+         */
+        
         tm = new Timer(20, this);
+        
         menub = new JButton("MENU");
         
         setLayout(null);
@@ -49,18 +71,19 @@ public class Zwierzeta extends JPanel implements ActionListener {
         przyciski();
         Obrazy.loadInitialImages(); 
         
+        // obsługa zdarzenia kliknięcia myszy, która zbiera jego współrzędne
         addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e) {
             xc=e.getX();
             yc=e.getY();
             }
         }); 
-        
-        
-       
-       
+      
     }
     
+    /**
+     * Metoda restartująca wszystkie współrzędne i zmienne po odgadnięciu całego wyrazu
+     */
     public static void restart(){
         y=0;
         y2=-250;
@@ -79,6 +102,10 @@ public class Zwierzeta extends JPanel implements ActionListener {
         yc=0;
         
     }
+    
+    /**
+     * Metoda restartująca wszystkie współrzędne i zmienne po zrestartowaniu gry
+     */
     
     public static void restartz(){
         y=0;
@@ -99,27 +126,13 @@ public class Zwierzeta extends JPanel implements ActionListener {
         yc=0;
     }
     
-    /*public void graj(){
-        if (czyc||czya||czyt||czyd||czyo||czyg||czyc1||czyo1||czyw)
-            playSound(new File("images/click.wav"));
-    }
-    
-    public static synchronized void playSound(final File f) {
-        new Thread(new Runnable() {
-          public void run() {
-            try {
-              Clip clip = AudioSystem.getClip();
-              AudioInputStream inputStream = AudioSystem.getAudioInputStream(f);
-              clip.open(inputStream);
-              clip.start(); 
-            } catch (Exception e) {
-              System.err.println(e.getMessage());
-            }
-          }
-        }).start();
-    }*/
+    /**
+     * Metoda rysująca tło oraz obrazy literek 
+     * @param gs
+     */
     
     protected void paintComponent(Graphics gs){
+        /** Zmienne potrzebne w pętlach, które zapewniają przerwę między literami w rzędzie */
         int a=1, b=1, c=1, d=1, e=1, f=1, h=1, h1=1, j=1, k=1, l=1, m=1, n=1, o=1, p=1, r=1, s=1, t=1, u=1, w=1, a1=1, b1=1, c1=1, d1=1, e1=1, f1=1, g1=1;
         
         super.paintComponent(gs);
@@ -127,12 +140,12 @@ public class Zwierzeta extends JPanel implements ActionListener {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.drawImage(Obrazy.bgzwImage, 0, 0, null);
         
-        
+        // sprawdzenie czy okno dialogowe zniknęło
         if (Zwierzeta.czywyswietlonoz){
-        //g.setColor(Color.RED);
-        //g.fillRect(30,y,50,30);
+            // sprawdzenie czy jest to 1 poziom
             if(czy1poziomz){
-                for(int i=2;i<18;i+=5){ //SPRAWDZONE DZIALA WSZYSTKO
+                //pętle rysujące rzędy 4 literek w różnych kombinacjach               
+                for(int i=2;i<18;i+=5){
                     g.drawImage(Obrazy.letters[i], x*a*4, y, null);
                     a++;
 
@@ -174,10 +187,7 @@ public class Zwierzeta extends JPanel implements ActionListener {
                 }
             }
             
-            
-            
-            
-            
+            // sprawdzenie czy 1 poziom został ukończony i czy JDialog zniknął
             if(czy2poziomz && czywyswietlonoz){
                 for(int i=1;i<11;i+=3){ 
                     g.drawImage(Obrazy.letters[i], x*j*4, y, null);
@@ -225,9 +235,7 @@ public class Zwierzeta extends JPanel implements ActionListener {
                 };
             }
             
-            
-            
-            
+            // sprawdzenie czy 2 poziom został ukończony i czy JDialog zniknął
             if (czy3poziomz && czywyswietlonoz){
                 for(int i=25;i>12;i-=4){ 
                     g.drawImage(Obrazy.letters[i], x*t*4, y, null);
@@ -279,13 +287,14 @@ public class Zwierzeta extends JPanel implements ActionListener {
                     f1++;
                 };
             }
-            
         }
-        
+        // włączenie timera odpowiedzialnego za animację 
         tm.start();
-        
     };
     
+    /**
+     * Metoda ustawiająca właściwości przycisków
+     */
     
     protected void przyciski(){
         
@@ -295,13 +304,18 @@ public class Zwierzeta extends JPanel implements ActionListener {
         menub.setForeground(Color.YELLOW);
     }
     
-    
+    /**
+     * Obsługa zdarzenia
+     */
 
     @Override
     public void actionPerformed(ActionEvent e) {
         
         if (Zwierzeta.czywyswietlonoz){
+            // w zależności od rożnych poziomów szybkość "animacji" jest różna, 
+            //więc velY jest różne dla każdego poziomu
             if(czy1poziomz){
+                //zmiana współrzędnych wraz z każdym odrysowaniem panelu
                 y = y + velY1;
                 y2= y2 + velY1; 
                 y3= y3 + velY1; 
@@ -339,11 +353,13 @@ public class Zwierzeta extends JPanel implements ActionListener {
                 y9= y9 + velY3;
                 y10=y10+ velY3;
             }       
-            
+            // odrysowanie panelu
             repaint();
             
             
             if(czy1poziomz){
+                //warunki sprawdzające, czy kliknięcie pokrywa się z odpowiednią literką w zależności
+                //od jej narysowania oraz czy poprzednie literki zostały wybrane 
                 if(wyl==0){
                     if(240<xc && xc<340 && y<yc && yc<y+94){
                         
@@ -362,12 +378,11 @@ public class Zwierzeta extends JPanel implements ActionListener {
                     }
                     else if(czyc==true && czya==true && czyt==true){
                         System.out.println("OK cat");
+                        // wywołanie funkcji restartującej wszystkie zmienne
                         restart();
                         Zwierzeta.czy2poziomz=true;
-                        
-                        Slowoz slowoz2 = new Slowoz();
-                        
-                        
+                        // wywołanie okna dialogowego z wylosowanym słowem
+                        Slowoz slowoz2 = new Slowoz(); 
                     }
 
                 }   
@@ -420,13 +435,15 @@ public class Zwierzeta extends JPanel implements ActionListener {
                         Slowoz slowoz2 = new Slowoz();
                     }
                 }
+                // warunek sprawdzający czy ostatni rząd zniknął i nie zostały spełnione poprzednie warunki
                 if(y8==1000){
-                koniec.setVisible(true);
+                    // uwidocznienie okna dialogowego z informacją o końcu gry 
+                    koniec.setVisible(true);
                 
                 }
             }
             else if (czy2poziomz){
-                if(wyl==0){//SPRAWDZONE DZIALA WSZYSTKO
+                if(wyl==0){
                     if(720<xc && xc<820 && y<yc && yc<y+94 || 720<xc && xc<820 && y2<yc && yc<y2+94){
                         System.out.println("h");
                         czyh=true;
@@ -556,7 +573,7 @@ public class Zwierzeta extends JPanel implements ActionListener {
                         System.out.println("OK zebra");
                         czy4poziomz=true;
                         wygr.setVisible(true);
-                        
+                        restart();
                     }
 
                 }   
@@ -590,7 +607,7 @@ public class Zwierzeta extends JPanel implements ActionListener {
                         System.out.println("OK shark");
                         czy4poziomz=true;
                         wygr.setVisible(true);
-                        
+                        restart();
                     }
                 }
 
@@ -632,7 +649,9 @@ public class Zwierzeta extends JPanel implements ActionListener {
                     else if(czyg2==true && czyi1==true && czyr5==true && czya3==true && czyf1==true && czyf2==true && czye2==true){
                         System.out.println("OK giraffe");
                         czy4poziomz=true;
+                        
                         wygr.setVisible(true);
+                        restart();
                     }
                 }
                 if(y10==1000)
@@ -646,9 +665,22 @@ public class Zwierzeta extends JPanel implements ActionListener {
     
 }
 
+/**
+ * Klasa Slowoz dziedzicząca po JDialog, która realizuje wyświetlanie się okna 
+ * dialogowego z wylosowanym słowem przez określony czas 
+ * @author Olga Krezymon
+ */
+
 class Slowoz extends JDialog{
     
+    /** Zmienne tablicowe przechowujące słowa w zależności od poziomu trudności */
     public static String[] slowaz1, slowaz2, slowaz3;
+    
+    /**
+    * Konstruktor klasy Slowoz, w którym ustawiane są właściwości okna i uruchamiany timer
+    * realizujący wyświetlanie okna przez 5 sekund.
+    * @author Olga Krezymon
+    */
     
     public Slowoz(){
         
@@ -658,6 +690,7 @@ class Slowoz extends JDialog{
         setUndecorated(true);
         setResizable(false); 
         
+        //stworzenie i dodanie panelu do okna dialogowego
         Panel slowko = new Panel(); 
         add(slowko);
      
@@ -666,6 +699,12 @@ class Slowoz extends JDialog{
         setVisible(true);
        
     }
+    
+    /**
+    * Metoda czasowa, która pozwala na wyświetlenie okna dialogowego przez czas 5 sekund
+    * a następnie jego zniknięcie
+    * @author Olga Krezymon
+    */
     
     public void timer(){
         javax.swing.Timer timer = new javax.swing.Timer(5000, (ActionEvent e) -> {
@@ -679,11 +718,21 @@ class Slowoz extends JDialog{
         timer.start();
     }
     
-    
+    /**
+    * Klasa Panel, która realizuje wyświetlenie słówka w formie okna dialogowego
+    * @author Olga Krezymon
+    */
     
     public class Panel extends JPanel{
         
+        /** Zmienna przechowująca wynik funkcji losuj */
         int wylosowany;
+        
+        /**
+        * Konstruktor klasy Panel, przypisuje tablicom wartości a następnie
+        * w zależnośći od poziomu wyświetla odpowiednio wylosowane słowo
+        * @author Olga Krezymon
+        */
         
         public Panel(){
             
@@ -703,8 +752,10 @@ class Slowoz extends JDialog{
             slowaz3[1]="SHARK";
             slowaz3[2]="GIRAFFE";
             
+            //wywołanie funkcji losuj1()
             Zwierzeta.wyl=losuj();
             if(Zwierzeta.czy1poziomz){
+                //zdefiniowanie napisu zawierającego jedną z wylosowanych komórek tablicy
                 JLabel sl1 = new JLabel(slowaz1[Zwierzeta.wyl]);
                 setSize(400, 200); 
                 setLayout(null);
@@ -738,10 +789,13 @@ class Slowoz extends JDialog{
             
         }
         
-        
+        /**
+        * Metoda losująca cyfrę z zakresu od 0 do 2
+        * @author Olga Krezymon
+        */
         
         public int losuj(){
-            
+            // określony zakres cyfr do losowania
             int zakres=slowaz1.length-1;
             wylosowany=(int)Math.round(Math.random()*zakres);
             return wylosowany;

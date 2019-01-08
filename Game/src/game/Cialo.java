@@ -17,22 +17,48 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/**
+ * Klasa cialo dziedzicząca po JPanel implementująca ActionListener. 
+ * Panel, w którym dzieje się cała rozgrywka w kategorii "CIALO" 
+ * @author Olga Krezymon
+ */
+
 public class Cialo extends JPanel implements ActionListener{
     
+    /** Przycisk przejścia do menu */
     JButton menub;
+    /** Timer odpowiedzialny za animację literek */
     Timer tm;
+    /** Timer odpowiedzialny za wyświetlanie JDialog przez określony czas*/
     Timer t;
+    /** Współrzędne spadających literek */
     static int x=60,  y=0, velY1=2, velY2=3, velY3=4, y2=-250, y3=-500, y4=-750, y5=-1000, y6=-1250, y7=-1500, y8=-1750, y9=-2000, y10=-2250, y11=-2500;
     
+    /** Zmienna boolowska, która informuje o upłynięciu czasu timera odpowiedzialnego za wyświetlanie JDialoga */
     boolean czyl, czye, czyg, czya, czyr, czym, czye1, czyy, czye2, czyh, czye3, czya1, czyd, czyh1, czya2, czyi, czyr1, czyn, czyo, czys, czye4, czys1, czyt, czyo1, czym1, czya3, czyc, czyh2, czym2, czyo2, czyu, czyt2, czyh3, czyc1, czyh4, czye5, czye6, czyk2, czys2;
+    /** Zmienne boolowskie sprawdzające, czy użytkownik wybrał prawidłową literkę */
     public static boolean czywyswietlonoc = false;
+    /** Zmienne boolowskie sprawdzające, czy użytkownik prawidłowo odgadł całe słowo */
     public static boolean czy1poziomc=true, czy2poziomc, czy3poziomc, czy4poziomc;
+    /** Współrzędne kliknięcia */
     static int xc, yc;
+    /** Zmienna przechowująca wynik funkcji losuj() */
     static int wyl;
+    /** Utworzenie obiektu typu Przegrana */
     Przegrana koniec = new Przegrana();
+    /** Utworzenie obiektu typu Wygrana */
     Wygrana wygr = new Wygrana();
     
+    /**
+     * Konstruktor klasy Cialo
+     * Wywołuje timer, definiuje przycisk i wywołuje funkcję przyciski() oraz 
+     * funkcję rysującą tło. Obsługuje zdarzenie kliknięcia myszy
+     */
+    
     public Cialo(){
+        
+        // Timer relizujący "animację", która odświeża obraz co 20 milisekund wskazujący
+        // na użycie ActionListener po którym implementuje klasa Cialo
         
         tm = new Timer(20, this);
         menub = new JButton("MENU");
@@ -44,6 +70,7 @@ public class Cialo extends JPanel implements ActionListener{
         przyciski(); 
         Obrazy.loadInitialImages();
         
+        // obsługa zdarzenia kliknięcia myszy, która zbiera jego współrzędne
         addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e) {
             xc=e.getX();
@@ -53,26 +80,35 @@ public class Cialo extends JPanel implements ActionListener{
         });
         
     }
-        public void restart(){
-            y=0;
-            y2=-250;
-            y3=-500;
-            y4=-750;
-            y5=-1000;
-            y6=-1250;
-            y7=-1500; 
-            y8=-1750;
-            y9=-2000; 
-            y10=-2250;
-            y11=-2500;
-            czywyswietlonoc=false;
-            czy1poziomc=false;
-            czy2poziomc=false;
-            xc=0;
-            yc=0;
-        };
+    
+    /**
+     * Metoda restartująca wszystkie współrzędne i zmienne po odgadnięciu całego wyrazu
+     */
+    
+    public void restart(){
+        y=0;
+        y2=-250;
+        y3=-500;
+        y4=-750;
+        y5=-1000;
+        y6=-1250;
+        y7=-1500; 
+        y8=-1750;
+        y9=-2000; 
+        y10=-2250;
+        y11=-2500;
+        czywyswietlonoc=false;
+        czy1poziomc=false;
+        czy2poziomc=false;
+        xc=0;
+        yc=0;
+    };
         
-        public static void restartc(){
+    /**
+    * Metoda restartująca wszystkie współrzędne i zmienne po zrestartowaniu gry
+    */
+
+    public static void restartc(){
         y=0;
         y2=-250;
         y3=-500;
@@ -91,8 +127,14 @@ public class Cialo extends JPanel implements ActionListener{
         yc=0;
     }
     
+    /**
+     * Metoda rysująca tło oraz obrazy literek 
+     * @param gs
+     */
+        
     protected void paintComponent(Graphics gs){
         
+        /** Zmienne potrzebne w pętlach, które zapewniają przerwę między literami w rzędzie */
         int a=1, b=1, c=1, d=1, e=1, f=1, h=1, j=1, k=1, l=1, m=1, n=1, o=1, p=1, r=1, s=1, t=1, u=1, w=1, a1=1, b1=1, b2=1, c1=1, d1=1;
         super.paintComponent(gs);
         
@@ -100,9 +142,11 @@ public class Cialo extends JPanel implements ActionListener{
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.drawImage(Obrazy.bgzwImage, 0, 0, null);
         
+        // sprawdzenie czy okno dialogowe zniknęło
         if (Cialo.czywyswietlonoc){
+            // sprawdzenie czy jest to 1 poziom
             if (czy1poziomc){
-                
+                //pętle rysujące rzędy 4 literek w różnych kombinacjach 
                 for(int i=9;i<16;i+=2){ 
                     g.drawImage(Obrazy.letters[i], x*a*4, y, null);
                     a++;
@@ -135,7 +179,7 @@ public class Cialo extends JPanel implements ActionListener{
             }
             
             
-            
+            // sprawdzenie czy 1 poziom został ukończony i czy JDialog zniknął
             if(czy2poziomc && czywyswietlonoc){
                 for(int i=1;i<11;i+=3){ 
                     g.drawImage(Obrazy.letters[i], x*f*4, y, null);
@@ -174,7 +218,7 @@ public class Cialo extends JPanel implements ActionListener{
             }
             
             
-            
+            // sprawdzenie czy 2 poziom został ukończony i czy JDialog zniknął
             if (czy3poziomc && czywyswietlonoc){
                 for(int i=2;i<18;i+=5){ 
                     g.drawImage(Obrazy.letters[i], x*o*4, y, null);
@@ -232,8 +276,13 @@ public class Cialo extends JPanel implements ActionListener{
                 };
             }
         }
+        // włączenie timera odpowiedzialnego za animację 
         tm.start();
     };
+    
+    /**
+     * Metoda ustawiająca właściwości przycisków
+     */
     
     protected void przyciski(){
         
@@ -243,10 +292,17 @@ public class Cialo extends JPanel implements ActionListener{
         menub.setForeground(Color.YELLOW);
     }
     
+    /**
+     * Obsługa zdarzenia
+     */
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (Cialo.czywyswietlonoc){
+            // w zależności od rożnych poziomów szybkość "animacji" jest różna, 
+            //więc velY jest różne dla każdego poziomu
             if(czy1poziomc){
+                //zmiana współrzędnych wraz z każdym odrysowaniem panelu
                 y = y + velY1;
                 y2= y2 + velY1; 
                 y3= y3 + velY1; 
@@ -288,9 +344,11 @@ public class Cialo extends JPanel implements ActionListener{
                 
             }
             
-            
+        // odrysowanie panelu
         repaint();
             if (czy1poziomc){
+                //warunki sprawdzające, czy kliknięcie pokrywa się z odpowiednią literką w zależności
+                //od jej narysowania oraz czy poprzednie literki zostały wybrane 
                 if(wyl==0){ 
                         if(480<xc && xc<580 && y<yc && yc<y+94){
                             System.out.println("l");
@@ -309,8 +367,10 @@ public class Cialo extends JPanel implements ActionListener{
 
                         else if(czyl==true && czye==true && czyg==true){
                             System.out.println("OK");
+                            // wywołanie funkcji restartującej wszystkie zmienne
                             restart();
                             Cialo.czy2poziomc=true;
+                            // wywołanie okna dialogowego z wylosowanym słowem
                             Slowoc z5 = new Slowoc();
                         }
 
@@ -363,8 +423,10 @@ public class Cialo extends JPanel implements ActionListener{
                             Slowoc z5 = new Slowoc();
                         }
                     }
-                if(y6==1000)
-                    koniec.setVisible(true);
+                    // warunek sprawdzający czy ostatni rząd zniknął i nie zostały spełnione poprzednie warunki
+                    if(y6==1000)
+                        // uwidocznienie okna dialogowego z informacją o końcu gry 
+                        koniec.setVisible(true);
             }
             else if (czy2poziomc){    
 
@@ -583,9 +645,22 @@ public class Cialo extends JPanel implements ActionListener{
     }
 }
 
+/**
+ * Klasa Slowoc dziedzicząca po JDialog, która realizuje wyświetlanie się okna 
+ * dialogowego z wylosowanym słowem przez określony czas 
+ * @author Olga Krezymon
+ */
+
 class Slowoc extends JDialog{
     
+    /** Zmienne tablicowe przechowujące słowa w zależności od poziomu trudności */
     public static String[] slowac1, slowac2, slowac3;
+    
+    /**
+    * Konstruktor klasy Slowoz, w którym ustawiane są właściwości okna i uruchamiany timer
+    * realizujący wyświetlanie okna przez 5 sekund.
+    * @author Olga Krezymon
+    */
     
     public Slowoc(){
         
@@ -595,6 +670,7 @@ class Slowoc extends JDialog{
         setUndecorated(true);
         setResizable(false); 
         
+        //stworzenie i dodanie panelu do okna dialogowego
         Panel slowko = new Panel(); 
         add(slowko);
      
@@ -613,7 +689,19 @@ class Slowoc extends JDialog{
         timer.start();
     }
     
+    /**
+    * Metoda czasowa, która pozwala na wyświetlenie okna dialogowego przez czas 5 sekund
+    * a następnie jego zniknięcie
+    * @author Olga Krezymon
+    */
+    
     public class Panel extends JPanel{
+        
+        /**
+        * Konstruktor klasy Panel, przypisuje tablicom wartości a następnie
+        * w zależnośći od poziomu wyświetla odpowiednio wylosowane słowo
+        * @author Olga Krezymon
+        */
         
         public Panel(){
             slowac1 = new String[3];
@@ -632,6 +720,7 @@ class Slowoc extends JDialog{
             slowac3[1]="MOUTH";
             slowac3[2]="CHEEKS";
             
+            //wywołanie funkcji losuj1()
             Cialo.wyl=losuj();
             
             if(Cialo.czy1poziomc){
@@ -668,8 +757,14 @@ class Slowoc extends JDialog{
             }
         }
         
+        /**
+        * Metoda losująca cyfrę z zakresu od 0 do 2
+        * @author Olga Krezymon
+        */
+        
         public int losuj(){
  
+            // określony zakres cyfr do losowania
             int zakres=slowac1.length-1;
             int wylosowany=(int)Math.round(Math.random()*zakres);
             return wylosowany; 

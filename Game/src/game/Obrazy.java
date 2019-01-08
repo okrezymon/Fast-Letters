@@ -4,26 +4,37 @@ package game;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
+/**
+ * Klasa Obrazy. Zdefiniowane zmienne obrazów tła oraz zmienne tablicowe przechowujące
+ * obrazy liter
+ * @author Olga Krezymon
+ */
 
 public class Obrazy {
     
+    /** Obraz tła */
     public static Image bgImage;
     
+    /** Obraz tła */
     public static Image bgzwImage;
     
+    /** Tablica liter*/
     public static Image[] letters;
     
-    public static Image dupa;
-    
+    /**
+     * Metoda ładująca początkowe zasoby gry 
+     */
     
     public static void loadInitialImages() {
         
+        //załadowanie obrazów tła
         bgImage = loadImage("images/tlo4.jpg");
         bgzwImage = loadImage("images/tlozw.jpg");
         
-        dupa = loadImage("images/a.png");
+        //zdefiniowanie tablicy obrazów 
+        letters = new Image[26];
         
-        letters = new Image[260000];
+        //załadowanie obrazów do poszczególnych komórek w tablicy 
         letters[0]=loadImage("images/a.png");
         letters[1]=loadImage("images/b.png");
         letters[2]=loadImage("images/c.png");
@@ -54,6 +65,12 @@ public class Obrazy {
         
         
     }
+    
+    /**
+     * Metoda pobierania obiektu klasy Image na podstawie ścieżki
+     * dostepu podanej jako String
+     */
+    
     public static Image loadImage(String fileName) {
         return new ImageIcon(fileName).getImage();
     }    

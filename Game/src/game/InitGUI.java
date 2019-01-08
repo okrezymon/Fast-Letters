@@ -18,6 +18,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+//panel początkowy wywoływany wraz z włączeniem gry
+
 public class InitGUI extends JPanel  {
     
     JButton gra;
@@ -25,6 +27,8 @@ public class InitGUI extends JPanel  {
     JLabel n1;
     
     public InitGUI(){
+        
+        //zdefiniowanie i dodanie do panelu napisu i przycisków
         
         n1=new JLabel("Fast Letters");
         gra=new JButton(new ImageIcon("images/puzzle.png"));
@@ -38,6 +42,8 @@ public class InitGUI extends JPanel  {
         
         przyciski();
         Obrazy.loadInitialImages();
+        
+        //dodanie ActionListenera do przycisku wyjdź powodującego wyjście z programu
         wyjdz.addActionListener(new End());
         
     }

@@ -17,23 +17,49 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/**
+ * Klasa Jedzenie dziedzicząca po JPanel implementująca ActionListener. 
+ * Panel, w którym dzieje się cała rozgrywka w kategorii "JEDZENIE" 
+ * @author Olga Krezymon
+ */
 
 public class Jedzenie extends JPanel implements ActionListener{
     
+    /** Przycisk przejścia do menu */
     JButton menub;
+    /** Timer odpowiedzialny za animację literek */
     Timer tm;
+    /** Timer odpowiedzialny za wyświetlanie JDialog przez określony czas*/
     Timer t;
+    /** Współrzędne spadających literek */
     static int x=60,  y=0, velY1=2, velY2=3, velY3=4, y2=-250, y3=-500, y4=-750, y5=-1000, y6=-1250, y7=-1500, y8=-1750, y9=-2000, y10=-2250, y11=-2500, y12=-2750;
     
+    /** Zmienna boolowska, która informuje o upłynięciu czasu timera odpowiedzialnego za wyświetlanie JDialoga */
     public static boolean czywyswietlonoj = false;
+    /** Zmienne boolowskie sprawdzające, czy użytkownik wybrał prawidłową literkę */
     boolean czym, czye, czya, czyt, czym1, czyi, czyl, czyk, czyf, czyr, czyu, czyi1, czyt1, czyb, czya1, czyn, czya2, czyn2, czya3, czya4, czyp, czyp1, czyl1, czye1, czyc, czyo1, czyf1, czyf2, czye3, czye4, czyc1, czyh, czye5, czye6, czys, czye7, czyc2,czyh1,czyi2, czyc3, czyk1,czye8,czyn1,czyy, czyo2,czyg,czyh2,czyu1,czyr3,czyt2;
+    /** Zmienne boolowskie sprawdzające, czy użytkownik prawidłowo odgadł całe słowo */
     public static boolean czy1poziomj=true, czy2poziomj, czy3poziomj, czy4poziomj;
+    /** Współrzędne kliknięcia */
     static int xc, yc;
+    /** Zmienna przechowująca wynik funkcji losuj() */
     static int wyl;
+    /** Utworzenie obiektu typu Przegrana */
     Przegrana koniec = new Przegrana();
+    /** Utworzenie obiektu typu Wygrana */
     Wygrana wygr = new Wygrana();
     
+    /**
+     * Konstruktor klasy Jedzenie
+     * Wywołuje timer, definiuje przycisk i wywołuje funkcję przyciski() oraz 
+     * funkcję rysującą tło. Obsługuje zdarzenie kliknięcia myszy
+     */
+    
     public Jedzenie(){
+        
+        //Timer relizujący "animację", która odświeża obraz co 20 milisekund wskazujący
+        //na użycie ActionListener po którym implementuje klasa Jedzenie
+        
         
         tm = new Timer(20, this);
         menub = new JButton("MENU");
@@ -44,17 +70,22 @@ public class Jedzenie extends JPanel implements ActionListener{
         przyciski();
         
         Obrazy.loadInitialImages();
-        
+         
+        // obsługa zdarzenia kliknięcia myszy, która zbiera jego współrzędne
         addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e) {
             xc=e.getX();
             yc=e.getY();
-            //System.out.println(xc+","+yc);//these co-ords are relative to the component
             }
         }); 
         
       
     }
+    
+    /**
+     * Metoda restartująca wszystkie współrzędne i zmienne po odgadnięciu całego wyrazu
+     */
+    
     public void restart(){
             y=0;
             y2=-250;
@@ -75,6 +106,10 @@ public class Jedzenie extends JPanel implements ActionListener{
             yc=0;
     };
     
+    /**
+     * Metoda restartująca wszystkie współrzędne i zmienne po zrestartowaniu gry
+     */
+    
     public static void restartj(){
         y=0;
         y2=-250;
@@ -94,18 +129,26 @@ public class Jedzenie extends JPanel implements ActionListener{
         yc=0;
     }
     
+    /**
+     * Metoda rysująca tło oraz obrazy literek 
+     * @param gs
+     */
+    
     protected void paintComponent(Graphics gs){
         
+        /** Zmienne potrzebne w pętlach, które zapewniają przerwę między literami w rzędzie */
         int a=1, b=1, c=1, d=1, e=1, f=1, h=1, j=1, k=1, l=1, m=1, n=1, o=1, p=1, r=1, s=1, t=1, u=1, w=1, a1=1, b1=1, c1=1, d1=1, e1=1, f1=1, g1=1, h1=1, i1=1, j1=1, k1=1;
         super.paintComponent(gs);
         Graphics2D g=(Graphics2D)gs;
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.drawImage(Obrazy.bgzwImage, 0, 0, null);
         
+        // sprawdzenie czy okno dialogowe zniknęło
         if (Jedzenie.czywyswietlonoj){
-        //g.setColor(Color.RED);
-        //g.fillRect(30,y,50,30);
+
+        // sprawdzenie czy jest to 1 poziom
             if (czy1poziomj){
+                //pętle rysujące rzędy 4 literek w różnych kombinacjach 
                 for(int i=0;i<13;i+=4){ 
                     g.drawImage(Obrazy.letters[i], x*a*4, y, null);
                     a++;
@@ -147,7 +190,7 @@ public class Jedzenie extends JPanel implements ActionListener{
                 };
             }
             
-            
+            // sprawdzenie czy 1 poziom został ukończony i czy JDialog zniknął
             if (czy2poziomj && czywyswietlonoj){
             
                 for(int i=1;i<11;i+=3){ 
@@ -202,6 +245,7 @@ public class Jedzenie extends JPanel implements ActionListener{
             
             }
             
+            // sprawdzenie czy 2 poziom został ukończony i czy JDialog zniknął
             if (czy3poziomj && czywyswietlonoj){
                 for(int i=2;i<18;i+=5){ 
                     g.drawImage(Obrazy.letters[i], x*u*4, y, null);
@@ -265,9 +309,13 @@ public class Jedzenie extends JPanel implements ActionListener{
 
             }
         }
-        
+        // włączenie timera odpowiedzialnego za animację 
         tm.start();
     };
+    
+    /**
+     * Metoda ustawiająca właściwości przycisków
+     */
     
     protected void przyciski(){
         
@@ -277,10 +325,17 @@ public class Jedzenie extends JPanel implements ActionListener{
         menub.setForeground(Color.YELLOW);
     }
     
+    /**
+     * Obsługa zdarzenia
+     */
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (Jedzenie.czywyswietlonoj){
+            // w zależności od rożnych poziomów szybkość "animacji" jest różna, 
+            //więc velY jest różne dla każdego poziomu
             if(czy1poziomj){
+                //zmiana współrzędnych wraz z każdym odrysowaniem panelu
                 y = y + velY1;
                 y2= y2 + velY1; 
                 y3= y3 + velY1; 
@@ -322,9 +377,12 @@ public class Jedzenie extends JPanel implements ActionListener{
                 y11=y11+velY3;
                 y12=y12+velY3;
             }
+            // odrysowanie panelu
             repaint();
             
             if(czy1poziomj){
+                //warunki sprawdzające, czy kliknięcie pokrywa się z odpowiednią literką w zależności
+                //od jej narysowania oraz czy poprzednie literki zostały wybrane 
                 if(wyl==0){ 
                     if(960<xc && xc<1060 && y<yc && yc<y+94){
                         System.out.println("m");
@@ -347,8 +405,10 @@ public class Jedzenie extends JPanel implements ActionListener{
                     }
                     else if(czym==true && czye==true && czya==true && czyt==true){
                         System.out.println("OK");
+                        // wywołanie funkcji restartującej wszystkie zmienne
                         restart();
                         Jedzenie.czy2poziomj=true;
+                        // wywołanie okna dialogowego z wylosowanym słowem
                         Slowoj z8 = new Slowoj();
                         
                     }
@@ -415,7 +475,9 @@ public class Jedzenie extends JPanel implements ActionListener{
                         Slowoj z8 = new Slowoj();
                     }
                 }
+                // warunek sprawdzający czy ostatni rząd zniknął i nie zostały spełnione poprzednie warunki
                 if (y8==1000)
+                    // uwidocznienie okna dialogowego z informacją o końcu gry 
                     koniec.setVisible(true);
             }
             
@@ -661,9 +723,23 @@ public class Jedzenie extends JPanel implements ActionListener{
     
     
 }
+
+/**
+ * Klasa Slowoj dziedzicząca po JDialog, która realizuje wyświetlanie się okna 
+ * dialogowego z wylosowanym słowem przez określony czas 
+ * @author Olga Krezymon
+ */
+
 class Slowoj extends JDialog{
     
+    /** Zmienne tablicowe przechowujące słowa w zależności od poziomu trudności */
     public static String[] slowaj1, slowaj2, slowaj3;
+    
+    /**
+    * Konstruktor klasy Slowoz, w którym ustawiane są właściwości okna i uruchamiany timer
+    * realizujący wyświetlanie okna przez 5 sekund.
+    * @author Olga Krezymon
+    */
     
     public Slowoj(){
         
@@ -673,6 +749,7 @@ class Slowoj extends JDialog{
         setUndecorated(true);
         setResizable(false); 
         
+        //stworzenie i dodanie panelu do okna dialogowego
         Panel slowko = new Panel(); 
         add(slowko);
      
@@ -680,6 +757,12 @@ class Slowoj extends JDialog{
         setVisible(true);
        
     }
+    
+    /**
+    * Metoda czasowa, która pozwala na wyświetlenie okna dialogowego przez czas 5 sekund
+    * a następnie jego zniknięcie
+    * @author Olga Krezymon
+    */
     
     public void timer(){
         Timer timer = new Timer(5000, (ActionEvent e) -> {
@@ -691,7 +774,18 @@ class Slowoj extends JDialog{
         timer.start();
     }
     
+    /**
+    * Klasa Panel, która realizuje wyświetlenie słówka w formie okna dialogowego
+    * @author Olga Krezymon
+    */
+    
     public class Panel extends JPanel{
+        
+        /**
+        * Konstruktor klasy Panel, przypisuje tablicom wartości a następnie
+        * w zależnośći od poziomu wyświetla odpowiednio wylosowane słowo
+        * @author Olga Krezymon
+        */
         
         public Panel(){
             slowaj1 = new String[3];
@@ -710,7 +804,9 @@ class Slowoj extends JDialog{
             slowaj3[1] = "CHICKEN";
             slowaj3[2] = "YOGHURT";
             
+            //wywołanie funkcji losuj1()
             if(Jedzenie.czy1poziomj){
+                //zdefiniowanie napisu zawierającego jedną z wylosowanych komórek tablicy
                 Jedzenie.wyl=losuj();
                 JLabel sl = new JLabel(slowaj1[Jedzenie.wyl]);
                 setSize(400, 200); 
@@ -745,8 +841,14 @@ class Slowoj extends JDialog{
             }
         }
         
+        /**
+        * Metoda losująca cyfrę z zakresu od 0 do 2
+        * @author Olga Krezymon
+        */
+        
         public int losuj(){
  
+            // określony zakres cyfr do losowania
             int zakres=slowaj1.length-1;
             int wylosowany=(int)Math.round(Math.random()*zakres);
             return wylosowany; 

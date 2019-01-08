@@ -16,12 +16,20 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 /**
- *
- * @author User
+ * Klasa Wygrana dziedzicząca po JDialog. Wyświetla okno dialogowe, gdy 
+ * użytkownik przejdzie wszystkie poziomy i wygra grę. 
+ * @author Olga Krezymon
  */
 public class Wygrana extends JDialog{
     
     public static JButton dokat;
+    
+    /**
+     * Konstruktor klasy Wygrana
+     * Ustawia podstawowe parametry okna, wywołuje obiekt typu Panel, który
+     * jest do niego dodany oraz wykonuje obsługę zdarzenia po wciśnięciu 
+     * przycisku
+     */
     
     public Wygrana(){
         
@@ -31,13 +39,12 @@ public class Wygrana extends JDialog{
         setUndecorated(true);
         setResizable(false); 
         
+        //stworzenie Panelu gratulacje, i dodanie go do okna
         Panel gratulacje = new Panel(); 
         add(gratulacje);
+        
      
-        //timer();
-        
-        //setVisible(true);
-        
+        //obsługa zdarzenia wciśnięcia przycisku 
         dokat.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,19 +55,13 @@ public class Wygrana extends JDialog{
         });
        
     }
-    public void timer(){
-        javax.swing.Timer timer = new javax.swing.Timer(5000, (ActionEvent e) -> {
-            
-            setVisible(false);
-            dispose();
-            Zwierzeta.czy3poziomz=false;
-            Cialo.czy3poziomc=false;
-            Jedzenie.czy3poziomj=false;
-            
-        });
-        timer.setRepeats(false);
-        timer.start();
-    }
+    
+    
+    /**
+    * Klasa Panel dziedzicząca po JPanel. Dodaje napis oraz przycisk oraz ustala
+    * jego parametry.
+    * @author Olga Krezymon
+    */
     
     public class Panel extends JPanel{
         

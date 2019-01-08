@@ -23,20 +23,51 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.util.Timer;
 
+/**
+ * Klasa Okno dziedzicząca po JFrame
+ * Tworzy obiekty wszystkich paneli użytych w grze, relizuje ActionListenery 
+ * przycisków odpowiadające za przejścia pomiędzy panelami
+ * @author Olga Krezymon
+ */
+
 public class Okno extends JFrame {
     
+    /** Utworzenie obiektu poczatek typu InitGUI */
     InitGUI poczatek=new InitGUI();
+    
+    /** Utworzenie obiektu menu typu Menu */
     Menu menu=new Menu();
+    
+    /** Utworzenie obiektu kategoria typu Kategoria */
     Kategoria kategoria=new Kategoria();
+    
+    /** Utworzenie obiektu zwierzeta typu Zwierzeta */
     Zwierzeta zwierzeta=new Zwierzeta();
+    
+    /** Utworzenie obiektu jedzenie typu Jedzenie */
     Jedzenie jedzenie=new Jedzenie();
+    
+    /** Utworzenie obiektu cialo typu Cialo */
     Cialo cialo=new Cialo();
+    
+    /** Utworzenie obiektu info typu Info */
     Info info=new Info();
     
-    
+    /** Utworzenie obiektu cardPanel typu JPanel */
     JPanel cardPanel;
+    
+    /** Utworzenie obiektu cl typu CardLayout */
     CardLayout cl;
+    
     public static boolean doliterek;
+    
+    /**
+     * Konstruktor klasy pola graficznego gry.
+     * Ustawienia początkowe rozmiaru, położenia, widoczności
+     * Wywołanie funkcji panele realizującej cardLayout paneli 
+     * @param width Szerokość pola graficznego gry
+     * @param height Wysokość pola graficznego gry
+     */
     
     public Okno(int width, int height, int x, int y){
         
@@ -50,10 +81,12 @@ public class Okno extends JFrame {
         
         panele();  
         
-        
-        
     }
     
+    /**
+     * Metoda odpowiedzialna za dodanie paneli do cardPanelu oraz obsługę zdarzeń
+     * wciśnięcia przycisków
+     */
     
     public void panele(){
         
@@ -81,8 +114,9 @@ public class Okno extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cl.show(cardPanel,"ZWIERZETA");
-                
+                //wywołanie funkcji restartz() powodującej wyczyszczenie wszystkich zmiennych przed ponownym wybraniem kategorii
                 Zwierzeta.restartz();
+                //tworzenie obiektu slowoz typu Slowoz, który odpowiada za wyświetlenie słowa w formie JDialog
                 Slowoz slowoz = new Slowoz();
                 
             }
@@ -162,8 +196,6 @@ public class Okno extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cl.show(cardPanel,"WYBIERZ");
-                
-                
             }
             
         });
@@ -172,8 +204,6 @@ public class Okno extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cl.show(cardPanel,"WYBIERZ");
-                
-                
             }
             
         });

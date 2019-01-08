@@ -14,12 +14,24 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Klasa Menu dziedzicząca po JPanel
+ * Wyświetla przyciski umożliwiające wyjście, powrót oraz wyświetlenie info
+ * @author Olga Krezymon
+ */
+
 public class Menu extends JPanel{
     
     JButton odnowa;
     JButton infob;
     JButton wyjdz;
     JLabel n5;
+    
+    /**
+     * Konstruktor klasy Menu
+     * Ładuje obrazy do przycisków i wyświetla je w panelu
+     * Wywołuje funkcję ładująca tło
+     */
     
     public Menu(){
         
@@ -35,23 +47,44 @@ public class Menu extends JPanel{
         add(infob);
         add(wyjdz);
         
+        // wywołanie funkcji odpowiadającej za odpowiednie ustawienie przycisków 
         przyciski();
+        // wywolanie funkcji ładującej obraz tła
         Obrazy.loadInitialImages();
+        // dodanie obsługi zdarzenia wciśnięcia przycisku wyjścia
         wyjdz.addActionListener(new End());
           
     }
+    
+    /**
+     * Metoda odpowiedzialna za odrysowanie tła na panelu
+     * @param gs 
+     */
+    
     
     protected void paintComponent(Graphics gs){
         Graphics2D g=(Graphics2D)gs;
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.drawImage(Obrazy.bgImage, 0, 0, null);
     } 
+    
+    /**
+    * Klasa End implementująca ActionListener
+    * Obsługa zdarzenia wciśnięcia przycisku
+    * @author Olga Krezymon
+    */
+    
     public class End implements ActionListener{
         
         public void actionPerformed(ActionEvent e){
             System.exit(0);
         }
     }
+    
+    /**
+     * Metoda odpowiedzialna za ustawienie przycisków i ich właściwości
+     */
+    
     
     protected void przyciski(){
         

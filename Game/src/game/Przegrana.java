@@ -11,10 +11,22 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Klasa Przegrana dziedzicząca po JDialog. Wyświetla okno dialogowe, gdy 
+ * użytkownik przegra grę. 
+ * @author Olga Krezymon
+ */
 
 public class Przegrana extends JDialog{
     
     public static JButton dokat;
+    
+    /**
+     * Konstruktor klasy Przegrana
+     * Ustawia podstawowe parametry okna, wywołuje obiekt typu Panel, który
+     * jest do niego dodany oraz wykonuje obsługę zdarzenia po wciśnięciu 
+     * przycisku
+     */
     
     public Przegrana(){
         
@@ -24,13 +36,11 @@ public class Przegrana extends JDialog{
         setUndecorated(true);
         setResizable(false); 
         
+        //stworzenie Panelu koniec, i dodanie go do okna
         Panel koniec = new Panel(); 
         add(koniec);
      
-        //timer();
-        
-        //setVisible(false);
-        
+        //obsługa zdarzenia wciśnięcia przycisku dokat
         dokat.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -40,35 +50,27 @@ public class Przegrana extends JDialog{
             
         });
         
-       
     }
-    /*public void timer(){
-        javax.swing.Timer timer = new javax.swing.Timer(10000, (ActionEvent e) -> {
-            
-            setVisible(false);
-            dispose();
-            Zwierzeta.czy1poziomz=false;
-            Zwierzeta.czy2poziomz=false;
-            Zwierzeta.czy3poziomz=false;
-            Cialo.czy1poziomc=false;
-            Cialo.czy2poziomc=false;
-            Cialo.czy3poziomc=false;
-            Jedzenie.czy1poziomj=false;
-            Jedzenie.czy2poziomj=false;
-            Jedzenie.czy3poziomj=false;
-            
-        });
-        timer.setRepeats(false);
-        timer.start();
-    }*/
+    
+    /**
+    * Klasa Panel dziedzicząca po JPanel. Dodaje napis oraz przycisk oraz ustala
+    * jego parametry.
+    * @author Olga Krezymon
+    */
     
     public class Panel extends JPanel{
         
-        
+        /**
+        * Konstruktor klasy JPanel
+        * Definiuje przycisk przekierowujący do wyboru kategorii oraz napis i 
+        * określa ich właściwości
+        */
         
         public Panel(){
+            
             JLabel kon = new JLabel("PRZEGRAŁEŚ");
             dokat = new JButton("Wybór kategorii");
+            
             setSize(500, 300); 
             setLayout(null);
             
@@ -80,7 +82,9 @@ public class Przegrana extends JDialog{
             dokat.setBackground(Color.YELLOW);
             dokat.setFont(new Font("Comic Sans",Font.BOLD, 25));
             dokat.setForeground(Color.pink);
+            
             setBackground(Color.pink);
+            
             add(kon);
             add(dokat);
         }
